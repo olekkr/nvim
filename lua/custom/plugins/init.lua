@@ -6,6 +6,15 @@
 ---@module 'lazy'
 ---@type LazySpec
 return {
-  'ThePrimeagen/vim-be-good',
-  opt = {},
+  {
+    'ThePrimeagen/vim-be-good',
+    opt = {},
+  },
+  {
+    'jedrzejboczar/exrc.nvim',
+    dependencies = { 'neovim/nvim-lspconfig' }, -- (optional)
+    config = true,
+    opts = { --[[ your config ]]
+    },
+  },
 }
