@@ -59,6 +59,14 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = '[y]ank to +' })
 vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = '[y]ank to +' })
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = '[p]aste w/o polluting +' })
 
+vim.keymap.set('n', '<leader>td', function()
+  if vim.o.background == 'light' then
+    vim.o.background = 'dark'
+  else
+    vim.o.background = 'light'
+  end
+end, { desc = 'toggle [d]arkmode' })
+
 -- Diagnostic Config & Keymaps
 -- See :help vim.diagnostic.Opts
 vim.diagnostic.config {
@@ -94,10 +102,16 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
+  desc = 'Highlight when yanking (copying) tetxt',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function() vim.hl.on_yank() end,
 })
+
+-- vim.api.nvim_create_autocmd('OptionSet',{
+--   desc = "autocmd for dark-/lightmode switching",
+--   group = vim.api.nvim_create_augroup('Themeautomation', {}),
+--   callback =
+-- })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -133,6 +147,19 @@ require('lazy').setup({
     },
   },
 
+  -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
+  --
+  -- This is often very useful to both group configuration, as well as handle
+  -- lazy loading plugins that don't need to be loaded immediately at startup.
+  --
+  -- For example, in the following configuration, we use:
+  --  event = 'VimEnter'
+  --
+  -- which loads which-key before all the UI elements are loaded. Events can be
+  -- normal autocommands events (`:help autocmd-events`).
+  --
+  -- Then, because we use the `opts` key (recommended), the configuration runs
+  -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -250,7 +277,7 @@ require('lazy').setup({
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
-          previewer = false,
+          previewer = true,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
 
