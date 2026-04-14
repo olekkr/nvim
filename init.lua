@@ -75,8 +75,8 @@ vim.diagnostic.config {
   float = { border = 'rounded', source = 'if_many' },
 
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
-  virtual_text = true,
-  virtual_lines = false, -- Right now, it indents the whole doc, not ideal.
+  virtual_text = false,
+  virtual_lines = true, -- Right now, it indents the whole doc, not ideal.
 
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
   jump = { float = true },
@@ -384,6 +384,7 @@ require('lazy').setup({
               if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
             end
 
+            ---@diagnostic disable-next-line: param-type-mismatch -- SGTM 👍
             client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
               runtime = {
                 version = 'LuaJIT',
@@ -424,7 +425,7 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>pf',
         function() require('conform').format { async = true, lsp_format = 'fallback' } end,
         mode = '',
         desc = '[F]ormat buffer',
@@ -649,11 +650,11 @@ require('lazy').setup({
 
   -- TODO: pick some of these plugins out
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
 
   { import = 'custom.plugins' },
