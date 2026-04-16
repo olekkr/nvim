@@ -386,6 +386,7 @@ require('lazy').setup({
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        'markdownlint',
         -- You can add other tools here that you want Mason to install
       })
 
