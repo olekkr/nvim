@@ -1,4 +1,5 @@
 require 'customization'
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -14,7 +15,6 @@ rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
-  -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
   { 'NMAC427/guess-indent.nvim', opts = {} },
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -519,7 +519,36 @@ require('lazy').setup({
       })
     end,
   },
-
+  {
+    'ThePrimeagen/vim-be-good',
+    opt = {},
+  },
+  {
+    'jedrzejboczar/exrc.nvim',
+    dependencies = { 'neovim/nvim-lspconfig' }, -- (optional)
+    config = true,
+    opts = { --[[ your config ]]
+    },
+  },
+  {
+    'f-person/auto-dark-mode.nvim',
+    opts = {},
+  },
+  {
+    'ThePrimeagen/vim-be-good',
+    opt = {},
+  },
+  {
+    'jedrzejboczar/exrc.nvim',
+    dependencies = { 'neovim/nvim-lspconfig' }, -- (optional)
+    config = true,
+    opts = { --[[ your config ]]
+    },
+  },
+  {
+    'f-person/auto-dark-mode.nvim',
+    opts = {},
+  },
   -- TODO: pick some of these plugins out
   --
   require 'kickstart.plugins.debug',

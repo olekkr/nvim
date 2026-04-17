@@ -1,9 +1,9 @@
 
 # TODO
 
-- [ ] add dir structure
-- [ ] move config into config.lua
-- [ ] move kickstart plugins into custom plugins
+- [x] add dir structure
+- [x] move config into config.lua
+- [x] move kickstart plugins into init plugins
 - [ ] splitup custom plugins init.lua
 - [ ] delete old structure
 - [ ] add harpoon

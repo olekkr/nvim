@@ -5,20 +5,4 @@
 
 ---@module 'lazy'
 ---@type LazySpec
-return {
-  {
-    'ThePrimeagen/vim-be-good',
-    opt = {},
-  },
-  {
-    'jedrzejboczar/exrc.nvim',
-    dependencies = { 'neovim/nvim-lspconfig' }, -- (optional)
-    config = true,
-    opts = { --[[ your config ]]
-    },
-  },
-  {
-    'f-person/auto-dark-mode.nvim',
-    opts = {},
-  },
-}
+return {}
