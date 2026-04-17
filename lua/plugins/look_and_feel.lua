@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazySpec
 return {
   { 'f-person/auto-dark-mode.nvim', priority = 1001, opts = {} },
   {
