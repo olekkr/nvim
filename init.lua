@@ -1,7 +1,6 @@
 require 'customization'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -15,7 +14,6 @@ rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
-  { 'NMAC427/guess-indent.nvim', opts = {} },
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -29,27 +27,6 @@ require('lazy').setup({
         delete = { text = '_' }, ---@diagnostic disable-line: missing-fields
         topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
         changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
-      },
-    },
-  },
-
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter',
-    ---@module 'which-key'
-    ---@type wk.Opts
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {
-      -- delay between pressing a key and opening which-key (milliseconds)
-      delay = 0,
-      icons = { mappings = vim.g.have_nerd_font },
-
-      -- Document existing key chains
-      spec = {
-        { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
-        { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },
   },
@@ -400,33 +377,6 @@ require('lazy').setup({
     },
   },
 
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
-      vim.cmd.colorscheme 'tokyonight-night'
-    end,
-  },
-
-  -- Highlight todo, notes, etc in comments
-  {
-    'folke/todo-comments.nvim',
-    event = 'VimEnter',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    ---@module 'todo-comments'
-    ---@type TodoOptions
-    ---@diagnostic disable-next-line: missing-fields
-    opts = { signs = false },
-  },
-
   { -- Collection of various small independent plugins/modules
     'nvim-mini/mini.nvim',
     config = function()
@@ -519,45 +469,22 @@ require('lazy').setup({
       })
     end,
   },
-  {
-    'ThePrimeagen/vim-be-good',
-    opt = {},
-  },
+  { 'NMAC427/guess-indent.nvim', opts = {} },
+  { 'ThePrimeagen/vim-be-good', opt = {} },
   {
     'jedrzejboczar/exrc.nvim',
-    dependencies = { 'neovim/nvim-lspconfig' }, -- (optional)
+    dependencies = { 'neovim/nvim-lspconfig' },
     config = true,
-    opts = { --[[ your config ]]
-    },
-  },
-  {
-    'f-person/auto-dark-mode.nvim',
     opts = {},
   },
-  {
-    'ThePrimeagen/vim-be-good',
-    opt = {},
-  },
-  {
-    'jedrzejboczar/exrc.nvim',
-    dependencies = { 'neovim/nvim-lspconfig' }, -- (optional)
-    config = true,
-    opts = { --[[ your config ]]
-    },
-  },
-  {
-    'f-person/auto-dark-mode.nvim',
-    opts = {},
-  },
-  -- TODO: pick some of these plugins out
-  --
+
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
 
-  { import = 'custom.plugins' },
+  { import = 'plugins' },
   --
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
 }, { ---@diagnostic disable-line: missing-fields
